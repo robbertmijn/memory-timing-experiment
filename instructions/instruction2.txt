@@ -1,0 +1,7 @@
+Instructions (part 2)
+##
+The experiment will last for about 45 minutes. No discomfort should be experienced during the experiment and you can quit the experiment at any time you like.
+##
+You will be rewarded with money if you make accurate responses. Every time you estimate the distance between the two letters with an accuaracy of x milliseconds, you receive y euro.
+##
+Please press enter/return to continue.

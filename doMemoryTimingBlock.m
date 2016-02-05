@@ -1,0 +1,91 @@
+function doMemoryTimingBlock(block_no, numTrials)
+
+global par;
+global w;
+
+fprintf('Start of doMemoryTimingBlock, block %i\n\n', block_no);
+
+% Create/Check output file
+
+% Define filenames of input files and result file:
+datafilename = strcat(par.dataDir, 'memoryTimingBlock-', ...
+    num2str(par.subj), '-', ...
+    num2str(block_no), '.dat');
+matfilename = regexprep(datafilename, 'dat$', 'mat');
+
+% check for existing result file to prevent accidentally overwriting
+% files from a previous subject/session (except for subject numbers > 9999):
+if par.subj ~= 9999 & fopen(datafilename, 'rt')~=-1
+    fclose('all');
+    error('Result data file already exists! Choose a different subject number.');
+else
+    datafilepointer = fopen(datafilename,'wt'); % open ASCII file for writing
+end
+
+% Write header:
+fprintf(datafilepointer, ...
+          ['subj, block_no, curtrial, totaltrial, t1, t1_response, t1_position, estimated_position_t1, ' ...
+           't2, t2_response, t2_position, estimated_position_t2, ' ...
+           'lag, estimated_lag, sequence\n']);
+
+% Create a table with sequences for the entire block, including info about
+% identity of t1, position of t1 and the lag between t1 and t2
+sequenceList = makeSequenceList(numTrials);
+
+par.curTrial = 0;
+% Begin experimental loop
+while (par.curTrial < numTrials)
+    par.curTrialGlobal = par.curTrialGlobal + 1;
+    
+    par.curTrial = par.curTrial + 1;
+    
+    waitUntilKeysReleased;
+    
+    % Each trial, the next sequence (and properties) from the sequencelist is
+    % sampled and stored
+    sequence = char(sequenceList{par.curTrial+1,1});
+    lag      = sequenceList{par.curTrial+1,2};
+    t1Pos    = sequenceList{par.curTrial+1,3};
+    t1       = sequenceList{par.curTrial+1,4};
+    t2       = sequenceList{par.curTrial+1,5};
+    if strcmp(t2,'NONE')
+        t2Pos = 9999;
+    else t2Pos = t1Pos + lag;
+    end
+    
+    % Present fixation cross
+    doFixation();
+
+    % Rapid Visual Presentation occurs now, every stimulus for 100 ms
+    setFont(par.stimulus);
+    onsetTime = GetSecs(); % used in debug for getting real interval times
+    for i = 1:length(sequence)
+        DrawFormattedText(w,sequence(i),'center', 'center', par.white);
+        [time1, time2, time3] = Screen('Flip',w,onsetTime + i/10 - par.ifi); % store [time1, time2, time3] for debug
+        time1 = time1 - onsetTime % used in debug for getting real interval times
+        time2 = time2 - onsetTime % used in debug for getting real interval times
+        time3 = time3 - onsetTime % used in debug for getting real interval times
+    end
+    
+    % Asking for the response occurs now
+    % [estimPosT1, respT1, estimPosT2, respT2] = askResponse(); % Ask
+    % response in a serial way.
+    [estimPosT1, respT1, estimPosT2, respT2] = askResponse(); % Ask timeline first
+    estimLag = estimPosT2 - estimPosT1;
+    
+    % write trial data to block file
+    fprintf(datafilepointer,'%i,%i,%i,%i,%s,%s,%i,%f,%s,%s,%i,%f,%i,%f,%s\n', ...
+        par.subj,block_no,par.curTrial, par.curTrialGlobal,t1,respT1,t1Pos,estimPosT1,...
+            t2,respT2,t2Pos,estimPosT2,lag, estimLag,sequence);
+    HideCursor;
+    
+end
+
+% write data for .mat
+save(matfilename,'par');
+% close datafile
+fclose(datafilepointer);
+
+fprintf('End of doMemoryTimingBlock.m %i\n\n', block_no);
+
+end

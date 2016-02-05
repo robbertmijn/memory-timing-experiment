@@ -1,0 +1,11 @@
+Instructions (part 1)
+##
+You will be shown a series of NUMBERS very rapidly. On most trials, there will also be one or two CAPITAL LETTERS in the stream of numbers. 
+##
+It's your task to identify these LETTERS, and to remember WHEN they occurred.
+##
+On the screen that appears after the stream of characters, two timelines will appear on which you can indicate if/when you saw the LETTERS.
+##
+The experimenter has given you an example of the screen on paper. If you still have questions, please ask them!
+##
+Please press enter/return to continue.
