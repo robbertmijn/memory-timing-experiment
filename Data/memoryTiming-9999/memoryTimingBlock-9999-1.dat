@@ -1,6 +1,1 @@
-subj, block_no, curtrial, totaltrial, t1, t1_response, t1_position, estimated_position_t1, t2, t2_response, t2_position, estimated_position_t2, lag, estimated_lag, sequence
-9999,1,1,1,A,A,7,6.488586,D,D,12,11.081838,5,4.593252,827834A2375D595414317
-9999,1,2,2,K,K,4,7.067576,E,E,13,16.142497,9,9.074921,626K34965817E27593174
-9999,1,3,3,P,P,4,3.129649,C,C,7,6.723145,3,3.593496,235P87C98157486963714
-9999,1,4,4,C,C,6,6.070597,B,B,11,10.804270,5,4.733673,12531C9368B7475861849
-9999,1,5,5,P,Q,6,6,R,K,11,11,5,5,12531C9368B7475861849
+subj, block_no, curtrial, totaltrial, t1, t1_response, t1_position, estimated_position_t1, respTimeT1,t2, t2_response, t2_position, estimated_position_t2, respTimeT2, lag, estimated_lag, sequence, SONA, age, sex, expDate

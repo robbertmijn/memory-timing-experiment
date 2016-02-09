@@ -28,6 +28,7 @@ text = ['You can now take a break!\n\n'...
     'The second letter you had correct on ' num2str(t2Corr) ' trials. Keep it up!\n\n'...
     'Press enter/return to continue to the next block'];
 
+setFont(par.normal);
 DrawFormattedText(w,text,'center', 'center', par.white);
 Screen('Flip', w);
 

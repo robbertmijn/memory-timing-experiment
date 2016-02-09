@@ -7,14 +7,15 @@ global par;
 global w;
 
 % instruction text set in setuppar and setdimensions
-setFont(par.stylebutton);
-leftString = ['Indicate on the this line when you saw the first letter.'] ;
+setFont(par.normal);
+leftString = ['Indicate on the this line\nwhen you saw the first letter.'] ;
 DrawFormattedText(w, leftString,par.width/4-200, 150, par.white);
-rightString = ['Indicate on the this line when you saw the second letter.'] ;
+rightString = ['Indicate on the this line\nwhen you saw the second letter.'] ;
 DrawFormattedText(w, rightString,3*par.width/4-200, 150, par.white);
 
 % estimation lines and screen divider
 Screen('DrawLines',w,par.lines,3,par.white);
+Screen('DrawDots',w,par.lines,10,par.white,[],[1]);
 
 % drawConfirmButton(width,height,x,y)
 % Returns the rectangle used to determine if it's clicked

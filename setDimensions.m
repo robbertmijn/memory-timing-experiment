@@ -17,7 +17,6 @@ par.line2Xb = 19*width/20;
 par.lineXa = width/20;
 par.lineXb = 19*width/20;
 
-
 % Confine space where input can be provided
 par.sizeConfirmScreen = 0.25;
 par.heightConfirmScreen = (1-par.sizeConfirmScreen)*height;

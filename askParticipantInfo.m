@@ -1,4 +1,4 @@
-function par = askParticipantInfo()
+function askParticipantInfo()
 
 % Ask for user identification:
 %
@@ -14,6 +14,7 @@ function par = askParticipantInfo()
 global w;
 global par;
 
+par.expDate = regexprep(datestr(now),' ','-');
 % setNormalFont();
 
 if ~par.debug
@@ -33,4 +34,4 @@ else
   par.subjSex = '1';
 end
 % ### par.subj set by experimenter, in itsTimeEEG.m
-par.subjInfo = [ par.expName ' ' num2str(par.subj) ' ' par.subjSONA ' ' par.subjAge ' ' par.subjSex ' ' regexprep(datestr(now),' ','-')];
+par.subjInfo = [ par.expName ' ' num2str(par.subj) ' ' par.subjSONA ' ' par.subjAge ' ' par.subjSex ' ' par.expDate];
